@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using AOC2024.Day1;
+﻿using AOC2024.Day2;
 
 var problem = new Problem2();
 problem.Run();

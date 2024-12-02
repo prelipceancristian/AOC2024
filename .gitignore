@@ -3,3 +3,5 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+/AOC2024/Inputs/*
+!/AOC2024/Inputs
