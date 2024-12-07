@@ -1,4 +1,4 @@
-﻿using AOC2024.Day6;
+﻿using AOC2024.Day7;
 
-var problem = new Problem2();
+var problem = new Problem1();
 problem.Run();
