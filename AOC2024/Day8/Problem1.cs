@@ -45,7 +45,8 @@ public class Problem1() : Day(8)
                 {
                     continue;
                 }
-                var antinodes = GetClosestAntinodes(map, antenna1, antenna2);
+                // var antinodes = GetClosestAntinodes(map, antenna1, antenna2);
+                var antinodes = GetAllAntinodes(map, antenna1, antenna2);
                 foreach (var antinode in antinodes)
                 {
                     antinodePositions.Add(antinode);
@@ -81,6 +82,32 @@ public class Problem1() : Day(8)
         var verticalOffset = antenna1.X - antenna2.X;
         var horizontalOffset = antenna1.Y - antenna2.Y;
         return (verticalOffset, horizontalOffset);
+    }
+
+    private static List<(int, int)> GetAllAntinodes(char[][] map, Antenna antenna1, Antenna antenna2)
+    {
+        var antinodePositions = new List<(int, int)>();
+        var (verticalOffset, horizontalOffset) = GetAntinodeOffsets(antenna1, antenna2);
+        
+        // calculate all antinodes that appear in the first direction
+        // in this situation, the antenna is is the first antinode. 
+        var antinode = (antenna1.X, antenna1.Y);
+        while (IsPositionValid(antinode, map))
+        {
+            antinodePositions.Add(antinode);
+            antinode = (antinode.Item1 + verticalOffset, antinode.Item2 + horizontalOffset);
+        }
+        
+        // calculate all in the second direction
+        // again, in this situation the antenna is the first antinode
+        antinode = (antenna2.X, antenna2.Y);
+        while (IsPositionValid(antinode, map))
+        {
+            antinodePositions.Add(antinode);
+            antinode = (antinode.Item1 - verticalOffset, antinode.Item2 - horizontalOffset);
+        }
+        
+        return antinodePositions;
     }
 
     private static bool IsPositionValid((int, int) position, char[][] map)
